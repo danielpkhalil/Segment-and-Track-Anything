@@ -8,3 +8,6 @@ pip install addict
 pip install yapf
 pip install timm
 pip install supervision
+pip install scikit-image
+sudo apt install gcc
+pip install pycocotools
