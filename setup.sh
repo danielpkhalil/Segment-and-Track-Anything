@@ -11,3 +11,4 @@ pip install supervision
 pip install scikit-image
 sudo apt install gcc
 pip install pycocotools
+pip install gradio
