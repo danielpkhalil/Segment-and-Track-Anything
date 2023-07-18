@@ -162,7 +162,9 @@ with torch.cuda.amp.autocast():
             track_mask = segtracker.track(frame)
             # find new objects, and update tracker with new objects
             new_obj_mask = segtracker.find_new_objs(track_mask, seg_mask)
-            save_prediction(new_obj_mask, output_dir, str(frame_idx) + '_new.png')
+
+            #save_prediction(new_obj_mask, output_dir, str(frame_idx) + '_new.png')
+
             pred_mask = track_mask + new_obj_mask
             # segtracker.restart_tracker()
             segtracker.add_reference(frame, pred_mask)
@@ -208,7 +210,10 @@ while cap.isOpened():
         break
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     pred_mask = pred_list[frame_idx]
-    masked_frame = draw_mask(frame, pred_mask)   #masked_frame = image * mask[:, :, np.newaxis]
+
+    #masked_frame = draw_mask(frame, pred_mask)
+    masked_frame = frame * pred_mask[:, :, np.newaxis]
+
     # masked_frame = masked_pred_list[frame_idx]
     masked_frame = cv2.cvtColor(masked_frame, cv2.COLOR_RGB2BGR)
     out.write(masked_frame)
